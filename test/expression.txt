@@ -518,6 +518,20 @@ PromQL(
   )
 )
 
+# Metric start
+
+start
+
+==>
+PromQL(Expr(VectorSelector(MetricIdentifier(Identifier))))
+
+# Metric end
+
+end
+
+==>
+PromQL(Expr(VectorSelector(MetricIdentifier(Identifier))))
+
 # Simple At start
 
 foo @ start()
@@ -682,7 +696,7 @@ PromQL(
         )
       )
       At,
-      SignedNumber(NumberLiteral)
+      NumberLiteral
     )
   )
 )
@@ -703,10 +717,24 @@ PromQL(
         )
       )
       At,
-      SignedNumber(NumberLiteral)
+      NumberLiteral
     )
   )
 )
+
+# Metric prefixed by Inf
+
+infra
+
+==>
+PromQL(Expr(VectorSelector(MetricIdentifier(Identifier))))
+
+# Metric prefixed by Nan
+
+nananere
+
+==>
+PromQL(Expr(VectorSelector(MetricIdentifier(Identifier))))
 
 # Mixed-case NaN.
 
@@ -732,6 +760,13 @@ PromQL(Expr(NumberLiteral))
 # Negative Inf.
 
 -Inf
+
+==>
+PromQL(Expr(NumberLiteral))
+
+# Positive Inf.
+
++Inf
 
 ==>
 PromQL(Expr(NumberLiteral))

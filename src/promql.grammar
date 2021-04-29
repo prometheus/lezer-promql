@@ -198,7 +198,7 @@ SubqueryExpr {
 }
 
 UnaryExpr {
-  !mul UnaryOp Expr
+  !mul UnaryOp~statement Expr
 }
 
 UnaryOp {
@@ -239,15 +239,15 @@ MetricIdentifier {
 }
 
 StepInvariantExpr {
-  Expr At ( NumberLiteral | SignedNumber | AtModifierPreprocessors "(" ")" )
+  Expr At ( NumberLiteral | AtModifierPreprocessors "(" ")" )
 }
 
 AtModifierPreprocessors {
   Start | End
 }
 
-SignedNumber{
-  ("+" | "-" ) NumberLiteral
+NumberLiteral  {
+ ("-"|"+")?~statement (digit | inf | nan)
 }
 
 @skip { whitespace | LineComment }
@@ -256,13 +256,9 @@ SignedNumber{
   whitespace { std.whitespace+ }
   LineComment { "#" ![\n]* }
 
-  NumberLiteral {
-    ("+" | "-")? (
+  digit {
       (std.digit+ ("." std.digit*)? | "." std.digit+) (("e" | "E") ("+" | "-")? std.digit+)? |
-      "0x" (std.digit | $[a-fA-F])+ |
-      $[nN]$[aA]$[nN] |
-      $[iI]$[nN]$[fF]
-    )
+      "0x" (std.digit | $[a-fA-F])+
   }
   StringLiteral { // TODO: This is for JS, make this work for PromQL.
     '"' (![\\\n"] | "\\" _)* '"'? |
@@ -303,20 +299,13 @@ SignedNumber{
 
   // Special Modifier
   At { "@" }
-
-  // Modifier Preprocessors
-  Start { "start" }
-  End { "end" }
-
-  // To parse signed numbers into a number literal and not a unary expression.
-  @precedence { NumberLiteral, "+", "-" }
-  // To parse NaN/Inf as a number literal.
-  @precedence { NumberLiteral, Identifier }
 }
 
 // Keywords
 
 @external specialize {Identifier} specializeIdentifier from "./tokens" {
+  inf,
+  nan,
   Bool,
   Ignoring,
   On,
@@ -344,7 +333,9 @@ SignedNumber{
   Without,
   And,
   Or,
-  Unless
+  Unless,
+  Start,
+  End
 }
 
   // FunctionIdentifier definitions

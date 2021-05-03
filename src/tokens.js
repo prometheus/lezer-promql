@@ -12,9 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Bool, Ignoring, On, GroupLeft, GroupRight, Offset, Avg, Bottomk, Count, CountValues, Group, Max, Min, Quantile, Stddev, Stdvar, Sum, Topk, By, Without, And, Or, Unless} from './parser.terms.js';
+import {
+    And,
+    Avg,
+    Bool,
+    Bottomk,
+    By,
+    Count,
+    CountValues,
+    End,
+    Group,
+    GroupLeft,
+    GroupRight,
+    Ignoring,
+    inf,
+    Max,
+    Min,
+    nan,
+    Offset,
+    On,
+    Or,
+    Quantile,
+    Start,
+    Stddev,
+    Stdvar,
+    Sum,
+    Topk,
+    Unless,
+    Without,
+} from './parser.terms.js';
 
 const keywordTokens = {
+  inf: inf,
+  nan: nan,
   bool: Bool,
   ignoring: Ignoring,
   on: On,
@@ -45,6 +75,8 @@ const contextualKeywordTokens = {
   and: And,
   or: Or,
   unless: Unless,
+  start: Start,
+  end: End,
 }
 
 export const extendIdentifier = (value, stack) => {

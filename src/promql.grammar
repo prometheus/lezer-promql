@@ -198,7 +198,7 @@ SubqueryExpr {
 }
 
 UnaryExpr {
-  !mul UnaryOp~statement Expr
+  !mul UnaryOp~signed Expr
 }
 
 UnaryOp {
@@ -247,7 +247,7 @@ AtModifierPreprocessors {
 }
 
 NumberLiteral  {
- ("-"|"+")?~statement (digit | inf | nan)
+ ("-"|"+")?~signed (number | inf | nan)
 }
 
 @skip { whitespace | LineComment }
@@ -256,7 +256,7 @@ NumberLiteral  {
   whitespace { std.whitespace+ }
   LineComment { "#" ![\n]* }
 
-  digit {
+  number {
       (std.digit+ ("." std.digit*)? | "." std.digit+) (("e" | "E") ("+" | "-")? std.digit+)? |
       "0x" (std.digit | $[a-fA-F])+
   }

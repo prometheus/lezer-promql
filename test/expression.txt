@@ -833,3 +833,62 @@ foo offset 5d
 
 ==>
 PromQL(Expr(OffsetExpr(Expr(VectorSelector(MetricIdentifier(Identifier))), Offset, Duration)))
+
+# Simple variable
+
+${foo}
+
+==>
+PromQL(Expr(VectorSelector(MetricIdentifier(Identifier(Variable)))))
+
+# Variable as an aggregation
+
+${myAggregation} by(l1) (foo)
+
+==>
+PromQL(Expr(AggregateExpr(AggregateOp(Variable),AggregateModifier(By,GroupingLabels(GroupingLabelList(GroupingLabel(LabelName)))),FunctionCallBody(FunctionCallArgs(Expr(VectorSelector(MetricIdentifier(Identifier))))))))
+
+# Operation with variable
+
+${foo} + ${MyHiddenNumber}
+
+==>
+PromQL(Expr(BinaryExpr(Expr(VectorSelector(MetricIdentifier(Identifier(Variable)))),Add,BinModifiers,Expr(VectorSelector(MetricIdentifier(Identifier(Variable)))))))
+
+# Variable as a label
+
+sum by(${l1}) (rate(metric{${l1}="value"}[5d]))
+
+==>
+PromQL(
+  Expr(
+    AggregateExpr(
+      AggregateOp(Sum),
+      AggregateModifier(By,GroupingLabels(GroupingLabelList(GroupingLabel(LabelName(Variable))))),
+      FunctionCallBody(
+        FunctionCallArgs(
+          Expr(
+            FunctionCall(
+              FunctionIdentifier(Rate),
+              FunctionCallBody(
+                FunctionCallArgs(
+                  Expr(
+                    MatrixSelector(
+                      Expr(
+                        VectorSelector(
+                          MetricIdentifier(Identifier),
+                          LabelMatchers(LabelMatchList(LabelMatcher(LabelName(Variable),MatchOp(EqlSingle),StringLiteral)))
+                        )
+                      ),
+                      Duration
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)

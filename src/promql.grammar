@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+@dialects { variables }
+
 @top PromQL { Expr }
 
 @precedence {
@@ -56,7 +58,8 @@ AggregateOp {
   Stddev |
   Stdvar |
   Sum |
-  Topk
+  Topk |
+  Variable~ambig-variable
 }
 
 AggregateModifier {
@@ -167,7 +170,8 @@ FunctionIdentifier {
   Timestamp |
   Time |
   Vector |
-  Year
+  Year |
+  Variable~ambig-variable
 }
 
 FunctionCallBody {
@@ -246,15 +250,23 @@ AtModifierPreprocessors {
   Start | End
 }
 
-NumberLiteral  {
- ("-"|"+")?~signed (number | inf | nan)
+NumberLiteral {
+ ("-"|"+")?~signed (number | inf | nan | Variable~ambig-variable)
 }
+
+Identifier { identifier | Variable~ambig-variable }
+
+LabelName { labelName | Variable }
 
 @skip { whitespace | LineComment }
 
 @tokens {
   whitespace { std.whitespace+ }
   LineComment { "#" ![\n]* }
+
+  Variable[@dialect=variables] {
+    "${" (std.digit | std.asciiLetter | "-" | "_")+ "}"
+  }
 
   number {
       (std.digit+ ("." std.digit*)? | "." std.digit+) (("e" | "E") ("+" | "-")? std.digit+)? |
@@ -277,8 +289,8 @@ NumberLiteral  {
     ( ( std.digit+ "y" )? ( std.digit+ "w" )? ( std.digit+ "d" )? ( std.digit+ "h" )? ( std.digit+ "m" )? ( std.digit+ "s" ) ( std.digit+ "ms" )? ) |
     ( ( std.digit+ "y" )? ( std.digit+ "w" )? ( std.digit+ "d" )? ( std.digit+ "h" )? ( std.digit+ "m" )? ( std.digit+ "s" )? ( std.digit+ "ms" ) )
   }
-  Identifier { (std.asciiLetter | "_" | ":") (std.asciiLetter | std.digit | "_" | ":" )*}
-  LabelName { (std.asciiLetter | "_") (std.asciiLetter | std.digit | "_")* }
+  identifier { (std.asciiLetter | "_" | ":") (std.asciiLetter | std.digit | "_" | ":" )*}
+  labelName { (std.asciiLetter | "_") (std.asciiLetter | std.digit | "_")* }
 
   // Operator
   Sub { "-" }
@@ -303,7 +315,7 @@ NumberLiteral  {
 
 // Keywords
 
-@external specialize {Identifier} specializeIdentifier from "./tokens" {
+@external specialize {identifier} specializeIdentifier from "./tokens" {
   inf,
   nan,
   Bool,
@@ -316,7 +328,7 @@ NumberLiteral  {
 
 // Contextual keywords
 
-@external extend {Identifier} extendIdentifier from "./tokens" {
+@external extend {identifier} extendIdentifier from "./tokens" {
   Avg,
   Bottomk,
   Count,
@@ -391,4 +403,4 @@ NumberLiteral  {
   Year { condFn<"year"> }
 
 // Conditional function names (only parsed as function names when used as such).
-condFn<term> { @extend<Identifier, term> }
+condFn<term> { @extend<identifier, term> }

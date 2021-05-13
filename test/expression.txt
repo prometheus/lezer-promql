@@ -833,3 +833,10 @@ foo offset 5d
 
 ==>
 PromQL(Expr(OffsetExpr(Expr(VectorSelector(MetricIdentifier(Identifier))), Offset, Duration)))
+
+# Parsing only metric names with alternative @top { "top": "MetricName" }
+
+sum:my_metric_name:rate5m
+
+==>
+MetricName(MetricIdentifier(Identifier))

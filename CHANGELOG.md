@@ -1,3 +1,10 @@
+0.19.0 / 2021-05-19
+===================
+
+* **[Feature]**: Provide an alternative `MetricName` top-level entrypoint
+* **[Enhancement]**: Improve parsing of numbers
+* **[BugFix]**: Fix parsing metric names starting with `Inf`/`NaN` like `infra`
+
 0.18.0 / 2021-03-26
 ===================
 

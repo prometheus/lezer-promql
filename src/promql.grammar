@@ -153,6 +153,7 @@ FunctionIdentifier {
   Minute |
   Month |
   PredictLinear |
+  PresentOverTime |
   QuantileOverTime |
   Rate |
   Resets |
@@ -374,6 +375,7 @@ NumberLiteral  {
   Minute { condFn<"minute"> }
   Month { condFn<"month"> }
   PredictLinear { condFn<"predict_linear"> }
+  PresentOverTime { condFn<"present_over_time"> }
   QuantileOverTime { condFn<"quantile_over_time"> }
   Rate { condFn<"rate"> }
   Resets { condFn<"resets"> }

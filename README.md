@@ -2,6 +2,11 @@
 
 [![CircleCI](https://circleci.com/gh/promlabs/lezer-promql.svg?style=shield)](https://circleci.com/gh/promlabs/lezer-promql) [![NPM version](https://img.shields.io/npm/v/lezer-promql.svg)](https://www.npmjs.org/package/lezer-promql)
 
+## Status
+
+This repository is **deprecated** and **won't be maintained** anymore. `lezer-promql` has been merged with `codemirror-promql` 
+and the code is available here: https://github.com/prometheus/prometheus/tree/main/web/ui/module/codemirror-promql/src/grammar
+
 ## Overview
 
 This is a PromQL grammar for the [lezer](https://lezer.codemirror.net/) parser system. It is inspired by the initial

@@ -1,11 +1,12 @@
 # lezer-promql
 
-[![CircleCI](https://circleci.com/gh/promlabs/lezer-promql.svg?style=shield)](https://circleci.com/gh/promlabs/lezer-promql) [![NPM version](https://img.shields.io/npm/v/lezer-promql.svg)](https://www.npmjs.org/package/lezer-promql)
+[![CircleCI](https://circleci.com/gh/prometheus/lezer-promql.svg?style=shield)](https://circleci.com/gh/prometheus/lezer-promql) [![NPM version](https://img.shields.io/npm/v/lezer-promql.svg)](https://www.npmjs.org/package/lezer-promql)
 
-## Status
+## Where does it come from?
 
-This repository is **deprecated** and **won't be maintained** anymore. `lezer-promql` has been merged with `codemirror-promql` 
-and the code is available here: https://github.com/prometheus/prometheus/tree/main/web/ui/module/codemirror-promql/src/grammar
+The authoritative copy of this code lives in `prometheus/prometheus` and is synced to
+`prometheus/lezer-promql` on a regular basis by a bot. Please contribute any code changes to the code
+in https://github.com/prometheus/prometheus/tree/main/web/ui/module/codemirror-promql/src/grammar.
 
 ## Overview
 
@@ -14,7 +15,7 @@ grammar coming from [Prometheus](https://github.com/prometheus/prometheus/blob/m
 written in yacc.
 
 This library is stable but doesn't provide any guideline of how to use it as it has been integrated
-into [codemirror-promql](https://github.com/prometheus-community/codemirror-promql). If you want to use this library,
+into [codemirror-promql](https://github.com/prometheus/codemirror-promql). If you want to use this library,
 you perhaps want to actually use **codemirror-promql** instead.
 
 **Note**: This library is following the changes of the upstream grammar (i.e. coming from Prometheus) as closed as possible

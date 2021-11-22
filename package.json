@@ -10,7 +10,7 @@
   },
   "module": "index.es.js",
   "types": "index.d.ts",
-  "author": "Julius Volz <julius.volz@promlabs.com>",
+  "author": "Prometheus Authors <prometheus-developers@googlegroups.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "lezer": "^0.13.1",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/promlabs/lezer-promql.git"
+    "url": "git+https://github.com/prometheus/lezer-promql.git"
   },
   "scripts": {
     "build": "bash ./build.sh",
@@ -35,7 +35,7 @@
     "promql"
   ],
   "bugs": {
-    "url": "https://github.com/promlabs/lezer-promql/issues"
+    "url": "https://github.com/prometheus/lezer-promql/issues"
   },
-  "homepage": "https://github.com/promlabs/lezer-promql#readme"
+  "homepage": "https://github.com/prometheus/lezer-promql#readme"
 }

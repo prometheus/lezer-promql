@@ -363,7 +363,7 @@ PromQL(
             MatchOp(NeqRegex),
             StringLiteral
           )
-        ),
+        )
       )
     )
   )
@@ -546,9 +546,9 @@ PromQL(
             Identifier
           )
         )
-      )
+      ),
       At,
-      AtModifierPreprocessors(Start),
+      AtModifierPreprocessors(Start)
     )
   )
 )
@@ -567,9 +567,9 @@ PromQL(
             Identifier
           )
         )
-      )
+      ),
       At,
-      AtModifierPreprocessors(End),
+      AtModifierPreprocessors(End)
     )
   )
 )
@@ -588,7 +588,7 @@ PromQL(
             Identifier
           )
         )
-      )
+      ),
       At,
       NumberLiteral
     )
@@ -609,9 +609,9 @@ PromQL(
             Identifier
           )
         )
-      )
+      ),
       At,
-      AtModifierPreprocessors(Start),
+      AtModifierPreprocessors(Start)
     )
   )
 )
@@ -694,7 +694,7 @@ PromQL(
             Identifier
           )
         )
-      )
+      ),
       At,
       NumberLiteral
     )
@@ -715,7 +715,7 @@ PromQL(
             Identifier
           )
         )
-      )
+      ),
       At,
       NumberLiteral
     )
@@ -840,3 +840,10 @@ sum:my_metric_name:rate5m
 
 ==>
 MetricName(MetricIdentifier(Identifier))
+
+# Parsing single function
+
+deg()
+
+==>
+PromQL(Expr(FunctionCall(FunctionIdentifier(Deg), FunctionCallBody)))

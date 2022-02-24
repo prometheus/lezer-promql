@@ -1,3 +1,9 @@
+0.21.0 / 2022-02-24
+===================
+
+* **[Feature]**: Support trigonometric functions
+* **[BreakingChange]**: lezer-promql depends on `@lezer/common` and not anymore on `lezer`
+
 0.20.0 / 2021-08-10
 ===================
 

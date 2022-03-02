@@ -1,3 +1,9 @@
+0.22.0 / 2022-03-02
+===================
+
+* **[BreakingChange]**: lezer-promql depends on `@lezer/lr`
+* **[BugFix]**: Fix the generated types
+
 0.21.0 / 2022-02-24
 ===================
 
